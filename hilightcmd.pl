@@ -3,7 +3,7 @@ use Irssi;
 
 use vars qw($VERSION %IRSSI);
 
-$VERSION = '1.4';
+$VERSION = '1.0';
 %IRSSI = (
   authors     => 'Matt "f0rked" Sparks',
   contact     => 'ms+irssi@quadpoint.org',
