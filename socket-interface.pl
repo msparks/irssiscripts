@@ -32,7 +32,8 @@ nonblock($server);
 
 
 # method to set a socket handle as nonblocking
-sub nonblock {
+sub nonblock
+{
   my($fd) = @_;
   my $flags = fcntl($fd, F_GETFL, 0);
   fcntl($fd, F_SETFL, $flags | O_NONBLOCK);
@@ -40,7 +41,8 @@ sub nonblock {
 
 
 # check the socket for data and act upon it
-sub check_sock {
+sub check_sock
+{
   my $msg;
   if (my $client = $server->accept()) {
     $client->recv($msg, 1024);
@@ -86,27 +88,31 @@ sub check_sock {
 
 # returns the name of the active window item. If there is no active window
 # item, return the name of the window itself.
-sub get_active_name {
+sub get_active_name
+{
   my $win = Irssi::active_win();
   return $win->get_active_name();
 }
 
 
 # returns the server tag of the active window item
-sub get_active_tag {
+sub get_active_tag
+{
   my $win = Irssi::active_win();
   return ($win->{active}) ? $win->{active}->{server}->{tag} : "";
 }
 
 
 # returns refnum of active window
-sub get_active_refnum {
+sub get_active_refnum
+{
   return (Irssi::active_win())->{refnum};
 }
 
 
 # switches windows to the given refnum
-sub switch_to {
+sub switch_to
+{
   my($refnum) = @_;
   my $window = Irssi::window_find_refnum($refnum);
   if ($window) {
@@ -119,7 +125,8 @@ sub switch_to {
 
 
 # gets the lines from a buffer of a window
-sub get_lines {
+sub get_lines
+{
   my($refnum) = @_;
   my $window = Irssi::window_find_refnum($refnum);
   if ($window) {
@@ -139,13 +146,15 @@ sub get_lines {
 
 
 # return highest refnum
-sub last_refnum {
+sub last_refnum
+{
   return Irssi::windows_refnum_last();
 }
 
 
 # name of given refnum's window
-sub name_of {
+sub name_of
+{
   my($refnum) = @_;
   my $win = Irssi::window_find_refnum($refnum);
   return $win->get_active_name();
@@ -153,7 +162,8 @@ sub name_of {
 
 
 # tag of given refnum's window
-sub tag_of {
+sub tag_of
+{
   my($refnum) = @_;
   my $win = Irssi::window_find_refnum($refnum);
   return ($win->{active}) ? $win->{active}->{server}->{tag} : "";
@@ -161,14 +171,16 @@ sub tag_of {
 
 
 # level of given refnum's window
-sub level_of {
+sub level_of
+{
   my($refnum) = @_;
   my $win = Irssi::window_find_refnum($refnum);
   return $win->{data_level};
 }
 
 
-sub msg {
+sub msg
+{
   my($refnum, $text) = @_;
   my $win = Irssi::window_find_refnum($refnum);
   return unless $win;
@@ -182,7 +194,8 @@ sub msg {
 }
 
 
-sub command {
+sub command
+{
   my($command) = @_;
   if (my $s = Irssi::active_server()) {
     $s->command($command);
@@ -193,13 +206,15 @@ sub command {
 }
 
 
-sub msg_active {
+sub msg_active
+{
   my($text) = @_;
   return msg(get_active_refnum(), $text);
 }
 
 
-sub get_log_fname {
+sub get_log_fname
+{
   my($servertag, $name) = @_;
   $name = lc($name);
   my $log_path = Irssi::settings_get_str("autolog_path");
@@ -216,7 +231,8 @@ sub get_log_fname {
 
 
 # return the last x lines of a given filename
-sub tail_log {
+sub tail_log
+{
   my($filename, $lines) = @_;
   $lines ||= 5;
   #print "found $filename";

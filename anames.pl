@@ -55,7 +55,8 @@ my $tmp_server;
 my $tmp_chan;
 
 
-sub cmd_anames {
+sub cmd_anames
+{
   my($args, $server, $item) = @_;
   my $channel = Irssi::active_win->{active};
   $tmp_server = $server;
@@ -80,7 +81,8 @@ sub cmd_anames {
 }
 
 
-sub print_anames {
+sub print_anames
+{
   my $server = $tmp_server;
   my $chan = $tmp_chan;
   my $channel = Irssi::Server::channel_find($server, $chan);
@@ -138,7 +140,8 @@ sub print_anames {
 
 # create a /names style column, increasing alphabetically going down the
 # columns.
-sub columnize_nicks {
+sub columnize_nicks
+{
   my($channel, @nicks) = @_;
   my $total = @nicks;
 
@@ -172,14 +175,16 @@ sub columnize_nicks {
 }
 
 
-sub fill_spaces {
+sub fill_spaces
+{
   my($text, $max_length) = @_;
   $text =~ s/%[a-zA-Z]//g;
   return " " x ($max_length - length($text));
 }
 
 
-sub find_max_length {
+sub find_max_length
+{
   my $max_length = 0;
   for (my $i = 0; $i < @_; $i++) {
     my $nick = $_[$i];
@@ -192,13 +197,15 @@ sub find_max_length {
 }
 
 
-sub round {
+sub round
+{
   my($number) = @_;
   return int($number + .5);
 }
 
 
-sub who_reply {
+sub who_reply
+{
   my($server, $data) = @_;
   my(undef, $c, $i, $h, $n, $s) = split / /, $data;
   if ($tmp_chan ne $c) {
@@ -208,7 +215,8 @@ sub who_reply {
 }
 
 
-sub who_reply_end {
+sub who_reply_end
+{
   print_anames();
   $tmp_chan = "";
 }
