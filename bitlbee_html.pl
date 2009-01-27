@@ -127,7 +127,7 @@ sub html2irc
   s/<\/font>//ig;
   s/<\/?body.*?>//isg;
   s/<\/?html>//ig;
-  s/<a href="(.+?)">(.*?)<\/a>/handle_link($1,$2)/iesg;
+  s/<a .*?href="(.+?)".*?>(.*?)<\/a>/handle_link($1,$2)/iesg;
 
   # note for <b>,<i>, and <u>, these are encapsulating tags, and they _may_
   # contain newlines. This script will split by newlines and emit message
