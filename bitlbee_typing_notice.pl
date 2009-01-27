@@ -69,7 +69,7 @@ $VERSION = '1.6.1';
     contact     => 'tijmen.ruizendaal@gmail.com, ms+irssi@quadpoint.org',
     name        => 'BitlBee_typing_notice',
     description => '1. Adds an item to the status bar wich shows [typing] when someone is typing a message on the supported IM-networks
-                    2. Sending typing notices to the supported IM networks (the other way arround)',
+                    2. Sending typing notices to the supported IM networks (the other way around)',
     license     => 'GPLv2',
     url         => 'http://the-timing.nl/stuff/irssi-bitlbee, http://quadpoint.org',
     changed     => '2006-11-02',
