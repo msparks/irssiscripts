@@ -130,8 +130,8 @@ sub event_ctcp_msg {
             if ($address !~ /\@login\.oscar\.aol\.com/
                 and $address !~ /\@YAHOO/
                 and $address !~ /\@login\.icq\.com/) {
-                Irssi::timeout_remove($tag{$from});
-                $tag{$from}=Irssi::timeout_add_once($STOP_TYPING_TIMEOUT*1000,"unset_typing",$from);
+                #Irssi::timeout_remove($tag{$from});
+                #$tag{$from}=Irssi::timeout_add_once($STOP_TYPING_TIMEOUT*1000,"unset_typing",$from);
             }
             redraw($from);
         }
