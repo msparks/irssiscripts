@@ -13,7 +13,10 @@
 #     sends messages to two separate machines with different passwords
 #
 # To turn on/off notifications while /away, toggle the setting
-# 'grumble_notify_when_away'.
+# 'grumble_notify_when_away'. Default: OFF.
+#
+# To enable/disable notifications for the active window, toggle the setting
+# 'grumble_notify_for_active_window'. Default: ON.
 use strict;
 use Irssi;
 use Net::Growl;
@@ -21,7 +24,7 @@ use IO::Socket::INET;
 
 use vars qw($VERSION %IRSSI);
 
-$VERSION = '1.1';
+$VERSION = '1.2';
 %IRSSI = (
   authors     => 'Matt "f0rked" Sparks',
   contact     => 'ms+irssi@quadpoint.org',
@@ -29,7 +32,7 @@ $VERSION = '1.1';
   description => 'Irssi integration with growl and mumbles',
   license     => 'BSD',
   url         => 'http://quadpoint.org',
-  changed     => '2009-01-22'
+  changed     => '2009-03-04'
 );
 
 
@@ -72,8 +75,9 @@ sub send_to_all
 sub event_privmsg
 {
   my($server, $msg, $nick, $address, $target) = @_;
-  #my $active = Irssi::active_win();
-  #return if $active->get_active_name() eq $nick;
+  my $active = Irssi::active_win();
+  return if ($active->get_active_name() eq $nick &&
+             !Irssi::settings_get_bool("grumble_notify_for_active_window"));
   send_to_all("irssi: $nick", "new private message from $nick");
 }
 
@@ -82,6 +86,10 @@ sub event_printtext
 {
   my ($dest, $text, $stripped) = @_;
   my $server = $dest->{server};
+
+  my $active = Irssi::active_win();
+  return if ($active->get_active_name() eq $dest->{window}->get_active_name() &&
+             !Irssi::settings_get_bool("grumble_notify_for_active_window"));
 
   return if ($server->{usermode_away} &&
              !Irssi::settings_get_bool("grumble_notify_when_away"));
@@ -99,3 +107,4 @@ Irssi::signal_add("print text", \&event_printtext);
 
 Irssi::settings_add_str("grumble", "grumble_targets", "localhost:grwlpass");
 Irssi::settings_add_bool("grumble", "grumble_notify_when_away", 0);
+Irssi::settings_add_bool("grumble", "grumble_notify_for_active_window", 1);
