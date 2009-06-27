@@ -90,7 +90,7 @@ sub add_task
   for my $key (keys %options) {
     printf SM "%s: %s\n", $key, substr($options{$key}, 0, -1);
   }
-  print SM "\n";
+  print SM "\n\n";
   close SM;
 }
 
