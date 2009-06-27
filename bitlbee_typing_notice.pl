@@ -60,6 +60,7 @@
 #
 use strict;
 use Irssi;
+use Irssi::TextUI;
 
 use vars qw($VERSION %IRSSI);
 
