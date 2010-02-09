@@ -24,7 +24,7 @@ use IO::Socket::INET;
 
 use vars qw($VERSION %IRSSI);
 
-$VERSION = '1.2';
+$VERSION = '1.3';
 %IRSSI = (
   authors     => 'Matt "f0rked" Sparks',
   contact     => 'ms+irssi@quadpoint.org',
@@ -32,7 +32,7 @@ $VERSION = '1.2';
   description => 'Irssi integration with growl and mumbles',
   license     => 'BSD',
   url         => 'http://quadpoint.org',
-  changed     => '2009-03-04'
+  changed     => '2010-02-08'
 );
 
 
@@ -75,6 +75,7 @@ sub send_to_all
 sub event_privmsg
 {
   my($server, $msg, $nick, $address, $target) = @_;
+
   my $active = Irssi::active_win();
   return if ($active->get_active_name() eq $nick &&
              !Irssi::settings_get_bool("grumble_notify_for_active_window"));
