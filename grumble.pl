@@ -78,6 +78,10 @@ sub event_privmsg
   my $active = Irssi::active_win();
   return if ($active->get_active_name() eq $nick &&
              !Irssi::settings_get_bool("grumble_notify_for_active_window"));
+
+  return if ($server->{usermode_away} &&
+             !Irssi::settings_get_bool("grumble_notify_when_away"));
+
   send_to_all("irssi: $nick", "new private message from $nick");
 }
 
