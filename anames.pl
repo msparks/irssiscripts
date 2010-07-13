@@ -5,6 +5,8 @@
 # Thanks to Dirm and Chris62vw for the Perl help and coekie for writing the
 # evil code to sort the nicklist by the alphabet and rank in nicklist.pl
 #
+# 1.5   - Fixed halfop display bug (patch by epinephrine), 20100712
+#
 # 1.4   - Merged changes from VMiklos and readded /who redirection to prevent
 #         spamming the status window. - ms, 20090122
 #
@@ -37,7 +39,7 @@ use POSIX;
 
 use vars qw($VERSION %IRSSI);
 
-$VERSION = '1.4';
+$VERSION = '1.5';
 %IRSSI = (
   authors     => 'Matt "f0rked" Sparks, Miklos Vajna',
   contact     => 'ms+irssi@quadpoint.org',
@@ -45,7 +47,7 @@ $VERSION = '1.4';
   description => 'a /names display with away nicks colored',
   license     => 'GPLv2',
   url         => 'http://quadpoint.org',
-  changed     => '2009-01-22',
+  changed     => '2010-07-12',
 );
 
 # How often to do a /who of all channels (in seconds)
@@ -107,7 +109,7 @@ sub print_anames
         $prefix = "@";
         $ops++;
       } elsif ($nick->{'halfop'}) {
-        $prefix = "%";
+        $prefix = "%%";
         $halfops++;
       } elsif ($nick->{'voice'}) {
         $prefix = "+";
