@@ -15,8 +15,6 @@
 #   /set bitlbee_hide_quits ON|OFF
 #       Same for buddies signing off, except it also applies to query windows,
 #       because Irssi shows quit notices in query windows automatically.
-#   /set bitlbee_hide_modes ON|OFF
-#       Ignores mode changes (voicing/devoicing for away status)
 #
 # As of version 1.4, these settings default to OFF.
 # If you wish also to ignore mode changes (voicing/devoicing):
@@ -36,7 +34,7 @@ $VERSION = '1.4';
   description => 'Adds detailed information about status changes to bitlbee query windows',
   license     => 'GPLv2',
   url         => 'http://quadpoint.org',
-  changed     => '2005-12-05',
+  changed     => '2010-03-04',
 );
 
 my $bitlbee_channel = "&bitlbee";
