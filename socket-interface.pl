@@ -185,10 +185,10 @@ sub msg
   my $win = Irssi::window_find_refnum($refnum);
   return unless $win;
   if ($text =~ /^\//) {
-    # this is a command, don't prepend /say
+    # this is a command, don't prepend /msg *
     $win->command($text);
   } else {
-    $win->command("say $text");
+    $win->command("msg * $text");
   }
   return 1;
 }
