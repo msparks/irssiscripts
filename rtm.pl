@@ -6,31 +6,21 @@
 #   3) /save
 #
 # Usage:
-#   /rtm <task> <options>
+#   /rtm <task>
 #
 #   where:
 #     <task>     task name, e.g. "do laundry"
-#     <options>  a string formatted like: [D: tomorrow E: 3 hours]
-#
-#       possible options (case insensitive):
-#         D: due
-#         E: time estimate
-#         L: list
-#         O: location
-#         P: priority
-#         R: repeat
-#         S: tags (comma separated)
-#         U: url
+#                Uses RTM's 'Smart Add' for due dates, priority, etc.
 #
 #   Examples:
 #     Do the dishes for an hour, priority 2.
-#       /rtm do dishes [E: 1 hour P: 2]
+#       /rtm do dishes =1 hour !2
 #
 #     Do homework, due tomorrow.
-#       /rtm homework [D: tomorrow]
+#       /rtm homework ^tomorrow
 #
 # See also:
-#   http://www.rememberthemilk.com/help/answers/sending/emailinbox.rtm
+#   http://www.rememberthemilk.com/services/email/
 use strict;
 use Irssi;
 
@@ -44,7 +34,7 @@ $VERSION = '1.0';
   description => 'Add new tasks to rememberthemilk.com',
   license     => 'BSD',
   url         => 'http://quadpoint.org',
-  changed     => '2007-09-08',
+  changed     => '2010-12-20',
 );
 
 
@@ -59,37 +49,8 @@ sub rtm_print
 
 sub add_task
 {
-  my($email, $text, $options_str) = @_;
-  my %opt_list = (priority => "p",
-                  due      => "d",
-                  repeat   => "r",
-                  estimate => "e",
-                  tags     => "s",
-                  location => "o",
-                  url      => "u",
-                  list     => "l");
-
-  # parse out options
-  my %options;
-
-  my $key = "";
-  for my $word (split / /, $options_str) {
-    if ($word =~ /:$/) {
-      $word =~ s/:$//;
-      if (grep /^\Q$word\E$/i, keys(%opt_list)) {
-        $key = $opt_list{$word};
-      } elsif (grep /^\Q$word\E$/i, values(%opt_list)) {
-        $key = $word;
-      }
-      next;
-    }
-    $options{$key} .= "$word " if $key ne "";
-  }
-
+  my($email, $text) = @_;
   open SM, qq(| mail -s "$text" $email);
-  for my $key (keys %options) {
-    printf SM "%s: %s\n", $key, substr($options{$key}, 0, -1);
-  }
   print SM "\n\n";
   close SM;
 }
@@ -106,18 +67,9 @@ sub cmd_rtm
     return;
   }
 
-  # task options are specified in [ ] at the end of the data
-  my($options) = $data =~ / \[\s*(.+?)\s*\]\s*$/;
-  $data =~ s/ \[(.+?)\]\s*$//;
-  $data =~ s/^\s*(.+?)\s*$/$1/;
+  add_task($email_addr, $data);
 
-  add_task($email_addr, $data, $options);
-
-  if ($options) {
-    rtm_print("$data [$options]");
-  } else {
-    rtm_print($data);
-  }
+  rtm_print($data);
 }
 
 
