@@ -74,3 +74,13 @@ Add new tasks to [Remember The Milk](http://rememberthemilk.com) through Irssi.
 Control and get information from Irssi via a Unix socket. This script is not as
 complete as it could (or should) be, but it allows for external programs to
 send commands to Irssi easily.
+
+## Themes
+
+### fear.theme
+
+A blueish theme.
+
+### fear2.theme
+
+A greenish theme.
