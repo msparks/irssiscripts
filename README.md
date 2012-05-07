@@ -54,16 +54,16 @@ This script uses [Net::Growl](http://search.cpan.org/perldoc?Net%3A%3AGrowl) to
 deliver notifications of hilights and private messages to multiple targets
 simultaneously while maintaining privacy.
 
-### hilightcmd.pl
-
-Run a command (such as a shell script that executes a series of beeps) when you
-are hilighted. It also has a setting to not run the command when you are away.
-
 ### hilight_notice.pl
 
 Changes the msglevel of notices to that used by private messages. This means
 that the status window will be hilighted like a query when a notice is
 received.
+
+### hilightcmd.pl
+
+Run a command (such as a shell script that executes a series of beeps) when you
+are hilighted. It also has a setting to not run the command when you are away.
 
 ### rtm.pl
 
