@@ -32,7 +32,7 @@
 # * root cares not about our typing status.
 #
 # 2005-12-04 (version 1.41):
-# * Implemented stale states in statusbar (shows "(stale)" for OSCAR connections) 
+# * Implemented stale states in statusbar (shows "(stale)" for OSCAR connections)
 # * Introduced bitlbee_typing_allwin (default OFF). Set this to ON to make
 #   typing notifications visible in all windows.
 #
